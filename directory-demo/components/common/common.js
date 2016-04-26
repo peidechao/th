@@ -52,7 +52,7 @@ var $=require("$"),
         if (end==-1) {end = DOC.cookie.length;}
         return decodeURIComponent(DOC.cookie.substring(start,end));
     }
-    //´æ´¢¼üÖµ¶Ô
+    //å­˜å‚¨é”®å€¼å¯¹
     function storeValue(key,value,type){
         var type=type||"url";
         switch(type){
@@ -75,7 +75,7 @@ var $=require("$"),
                 break;
         }
     };
-    //ÌáÈ¡Öµ
+    //æå–å€¼
     function getValue(key,type){
         var type=type||"url";
         switch(type){
@@ -93,7 +93,7 @@ var $=require("$"),
                 break;
         }
     };
-    //É¾³ıÖµ
+    //åˆ é™¤å€¼
     function deleteValue(key,type){
         var type=type||"all";
         if(!key){
@@ -119,7 +119,7 @@ var $=require("$"),
         }
     };
 
-    //urlÖĞÌáÈ¡Öµ¸¨Öúº¯Êı
+    //urlä¸­æå–å€¼è¾…åŠ©å‡½æ•°
     function getUrlparams(){
         var src=window.location.search,
             arr=src.substr(1,src.length-1).split("&"),
@@ -132,7 +132,7 @@ var $=require("$"),
         }
         return returnObj;
     };
-    //urlÖĞÌáÈ¡Öµ
+    //urlä¸­æå–å€¼
     function getParamValue(name){
         var param=getUrlparams();
         if(param[name]){
@@ -140,7 +140,7 @@ var $=require("$"),
         }
         return null;
     }
-    //µ÷ÊÔĞÅÏ¢´òÓ¡
+    //è°ƒè¯•ä¿¡æ¯æ‰“å°
     function log(){
         if (window.console &&debug) {
             Function.apply.call(console.log, console, arguments)
@@ -159,12 +159,12 @@ var $=require("$"),
             _window.location.href=location?location+Url:"../"+Url;
         }
     }
-    //½Ó¿Úµ÷ÓÃ¿ØÖÆ
+    //æ¥å£è°ƒç”¨æ§åˆ¶
     function useApi(apiName,apiSource){
         var source=apiSource||{},
             apiObj=source[apiName];
         if(!apiObj){
-            log("Î´ÕÒµ½"+apiName+"½Ó¿ÚÏà¹ØÊı¾İ");
+            log("æœªæ‰¾åˆ°"+apiName+"æ¥å£ç›¸å…³æ•°æ®");
             return false;
         }
         var competence=(apiObj.competence&&apiObj.competence)||true;
@@ -193,7 +193,7 @@ var $=require("$"),
         }
     }
 
-    //·â×°´øÓĞloadingÍ¼±êµÄajaxÇëÇó
+    //å°è£…å¸¦æœ‰loadingå›¾æ ‡çš„ajaxè¯·æ±‚
     function loadAjax(param){
         loading.show();
         return $.ajax({
@@ -215,7 +215,7 @@ var $=require("$"),
         )
     }
 
-    //MODULEÉú³É¶ÔÓ¦·µ»Ø½Ó¿Ú¹¤³§º¯Êı
+    //MODULEç”Ÿæˆå¯¹åº”è¿”å›æ¥å£å·¥å‚å‡½æ•°
     function moduleFactory(data){
         var obj={};
         $.each(data,function(name,value){
@@ -237,9 +237,9 @@ var $=require("$"),
     var num={
         format:function (num,options) {
             var opt = {
-                    type: "division",//ÀàĞÍ£ºintercept  ½ØÈ¡  £»division  ·Ö¸î  ;
-                    section: 3,//´¦ÀíÇø¼ä³¤¶È
-                    separator: ","//·Ö¸ô·û
+                    type: "division",//ç±»å‹ï¼šintercept  æˆªå–  ï¼›division  åˆ†å‰²  ;
+                    section: 3,//å¤„ç†åŒºé—´é•¿åº¦
+                    separator: ","//åˆ†éš”ç¬¦
                 },
                 type = typeof(options);
             switch (type) {
@@ -297,6 +297,7 @@ var $=require("$"),
         getValue:getValue,
         deleteValue:deleteValue,
         useApi:useApi,
+        linkTo:linkTo,
         moduleFactory:moduleFactory,
         num:num
     }
