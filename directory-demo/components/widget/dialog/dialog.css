@@ -1,0 +1,110 @@
+/*dialog*/
+
+.modal-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+
+.dialog {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none; }
+.dialog-wrap{position: absolute;top: 50%; left: 50%;margin-left: -300px; width:600px;}
+.dialog-head{position: relative;background: #51ace3;height: 40px; line-height: 40px;font-size: 16px; text-align: center; color: #ffffff;  border-top-right-radius: 6px; border-top-left-radius: 6px; }
+.dialog-head h5{line-height: 40px;font-size: 16px;margin: 0}
+.preview-title{ position: relative; }
+.preview-title>i{ display: inline-block; width: 20px;height: 20px;  background: url(../../assets/images/close-icon.png) no-repeat center; position: absolute; top: 10px; right: 10px; cursor: pointer; }
+.dialog-content{background-color: #fff;}
+.dialog-footer{background-color: #fff;text-align: center;border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; padding: 20px; }
+.dialog-footer button {
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    background: none;
+    border: none; }
+.dialog-footer button:first-child {
+    background: #51ace3;
+    color: #ffffff;
+    margin-right: 20px; }
+
+.dialog-footer button:last-child {
+    background: #eff3f4;
+    color: #5d6771; }
+
+
+.tipDialog  .dialog-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+//margin-left: -40px;
+}
+.tipDialog  .tipDialog-con{
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    padding: 8px 15px;
+    color: #ffffff;
+}
+
+.simpleDialog .dialog-wrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -120px;
+    background: #fff;
+    border-radius: 5px;
+    overflow: auto; }
+
+.simpleDialog .activeDialog {
+    z-index: 999999 !important; }
+
+.simpleDialog .dialog-content {
+    background: #51ace3;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    padding: 12px 20px; }
+
+.simpleDialog .dialog-footer {
+}
+
+.simpleDialog .dialog-footer button {
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center; }
+.innerDialog .dialog-wrap{
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 15px rgba(0,0,0,0.2);
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+.innerDialog .dialog-content{padding:0 10px;}
+.dialog.in{-webkit-animation:popIn 0.7s normal both; animation:popIn 0.7s normal both; -moz-animation:popIn 0.7s normal both; -o-animation:popIn 0.7s normal both; -ms-animation:popIn 0.7s normal both; }
+.dialog.out{-webkit-animation:popOut 0.7s normal both; animation:popOut 0.7s normal both;-moz-animation:popOut 0.7s normal both; -o-animation:popOut 0.7s normal both; -ms-animation:popOut 0.7s normal both;}
+
+
+
+/*animation*/
+@-webkit-keyframes popIn{0%{opacity:0;-webkit-transform:translate3d(0,-30px,0)}100%{opacity:1;-webkit-transform:translate3d(0,0,0)}}
+@-webkit-keyframes popOut{0%{opacity:1;-webkit-transform:translate3d(0,0,0)}100%{opacity:0;-webkit-transform:translate3d(0,30px,0)}}
+
+@keyframes popIn{0%{opacity:0; transform:translate3d(0,-30px,0);} 100%{opacity:1; transform:translate3d(0,0,0); }}
+@keyframes popOut{0%{opacity:1; transform:translate3d(0,0,0); } 100%{opacity:0; transform:translate3d(0,-30px,0);}}
+
+@-moz-keyframes popIn{0%{opacity:0; -moz-transform:translate3d(0,-30px,0); }100%{opacity:1; -moz-transform:translate3d(0,0,0);}}
+@-moz-keyframes popOut{0%{opacity:1; -moz-transform:translate3d(0,0,0);}100%{opacity:0; -moz-transform:translate3d(0,-30px,0); }}
+
+@-o-keyframes popIn{0%{opacity:0; -o-transform:translate3d(0,-30px,0);}100%{opacity:1; -o-transform:translate3d(0,0,0);}}
+@-o-keyframes popOut{0%{opacity:1;-o-transform:translate3d(0,0,0);}100%{opacity:0; -o-transform:translate3d(0,-30px,0);}}
+
+@-ms-keyframes popIn{0%{opacity:0; -ms-transform:translate3d(0,-30px,0);}100%{opacity:1; -ms-transform:translate3d(0,0,0);}}
+@-ms-keyframes popOut{0%{opacity:1;-ms-transform:translate3d(0,0,0);}100%{opacity:0; -ms-transform:translate3d(0,-30px,0);}}
