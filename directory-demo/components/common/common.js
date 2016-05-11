@@ -148,10 +148,11 @@ var $=require("$"),
     }
     function linkTo(name,obj,location){
         if(url[name]){
-            var Url=url[name].url+".html?",
+            var Url=url[name],
                 _window=this.window||window;
            // LINK[name].js&&(Url+="&js=1");
             if(obj){
+                Url+="?";
                 for(var _name in obj){
                     Url+="&"+encodeURIComponent(_name)+"="+encodeURIComponent(obj[_name]);
                 }
@@ -233,65 +234,57 @@ var $=require("$"),
         })
         return obj;
     }
-
-    var num={
-        format:function (num,options) {
-            var opt = {
-                    type: "division",//类型：intercept  截取  ；division  分割  ;
-                    section: 3,//处理区间长度
-                    separator: ","//分隔符
-                },
-                type = typeof(options);
-            switch (type) {
-                case "string":
-                    options == "intercept" ? (opt.type = options, opt.separator = "0") : opt.separator = options;
-                    break;
-                case "number":
-                    opt.section = options
-                    break;
-                case "object":
-                    for (var i in opt) {
-                        options[i] && (opt[i] = options[i])
-                    }
-                    break;
-            }
-            var _se = opt.section - 1,
-                num = (num + "").split(""),
-                l = num.length,
-                _num = "";
-            if (opt.type == "division") {
-                while (l) {
-                    _num = num.pop() + _num;
-                    if (_se) {
-                        _se -= 1
-                    } else {
-                        l !== 1 && (_num = opt.separator + _num);
-                        _se = opt.section;
-                    }
-                    l--
-                }
-            } else {
-                while (_se) {
-                    var str = num.pop();
-                    _num = (str ? str : opt.separator) + _num;
-                    _se--;
-                }
-            }
-            return _num;
-        },
-        digita:function(num,separator){
-            var separator=separator||",",
-                _num=num.split(separator),
-                l=_num.length,
-                value="";
-            while(l){
-                value=(_num.pop()+"")+value;
-                l--
-            }
-            return parseInt(value,10);
+    //对数字进行分割
+    function divisionNum(str,section,separator){
+        var section=section|| 3,
+            separator=separator||",",
+            reg=new RegExp('(\\d)(?=(?:\\d{'+section+'})+$)','g');
+        str=(str+"").replace(reg,'$1'+separator)
+        return str;
+    }
+    //对不足位数进行填充
+    function intercept(str,section,separator){
+        var section=section|| 3,
+            separator=separator||"0",
+            l=(str+"").length,
+            ary=new Array(section-0+1).join(separator);
+        if(l>=section){
+            return (str+"").substr(l-section)
+        }else{
+            return ary.substr(0,section-l)+str;
         }
+    }
+    //替换原字符中的指定元素
+    function digita(str,separator){
+        var separator=separator||",",
+            reg=new RegExp(separator,'g')
+        return (str+"").replace(reg,"")
+    }
+    var num={
+        division:divisionNum,
+        intercept:intercept,
+        digita:digita
     };
-
+    //日期处理
+    Date.prototype.format=function(str){
+        var week=["星期天","星期一","星期二","星期三","星期四","星期五","星期六"],
+            time={
+            "y+":this.getFullYear(),
+            "M+":this.getMonth()+1,
+            "d+":this.getDate(),
+            "H+":this.getHours(),
+            "m+":this.getMinutes(),
+            "s+":this.getSeconds(),
+                "w":this.getDay(),
+                "W":week[this.getDay()]
+            },
+            str=str||"yyyy-MM-dd HH:mm:ss";
+        for(var i in time){
+            var reg=new RegExp('('+i+')','g');
+            str=str.replace(reg,function(){return intercept(time[i],(i=="w"||i=="W")? time[i].length:arguments[1].length)})
+        }
+        return str;
+    }
     return {
         storeValue:storeValue,
         getValue:getValue,
